@@ -47,6 +47,27 @@ app.post("/vehicle/add", (req: Request , res: Response)=>{
     //console.log(vehicles)
     //res.status(201).send("Vehicle added")
 })
+app.get("/vehicle/search/:model",(req: Request, res: Response)=>{
+    //name: req.body.name
+    const findModel = req.params.model
+
+    let carModel = vehicles.filter((obj)=>{
+
+        return obj.model===findModel
+        
+    })
+    //console.log(carModel)
+    if(!carModel){
+        
+        res.send(404)
+    }
+    else{
+        
+        res.send(carModel)
+    }
+    //res.send(carModel)
+})
+
 
 app.listen(port, ()=>{
     console.log("TS server running at port:" +port)
