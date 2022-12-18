@@ -11,8 +11,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json())
 app.use(bodyParser.json());
 
-
-
 interface Automobile {
     model: string;
     color: string;
@@ -21,37 +19,32 @@ interface Automobile {
 }
 let vehicles: Automobile[]=[]
 
-//let kaara: Automobile = {model:"Volvo",color: "red", year:100, power: 9000}
-
-//console.log("hello from client side") 
-
-
+ 
 app.get("/hello",(req: Request, res: Response)=>{
     res.send("Hello world")
 })
 
-app.post("/vehicle/add", (req: Request, res: Response)=>{
+app.post("/vehicle/add", (req: Request , res: Response)=>{
     
-    const car: Automobile = {
-        model: req.body.model,
-        color: req.body.color,
-        year: req.body.year,
-        power: req.body.power
-    }
-/*     const car2: Automobile = {
-        model: "voo",
-        color: "asdf",
-        year: 123,
+    let car: Automobile = {
+        model: "volvo",
+        color: "puinainen",
+        year: 1234,
         power: 123
-    } */
-    //console.log(req.body.model)
+    }
 
-    //vehicles.push({model: "volvo", color: "punainen", year: 1990, power: 100})
-    //res.send(req.body)
-    vehicles.push(car)
-    res.send(vehicles)
+    //console.log(model)
 
-    //console.log(req.body.model)
+    vehicles.push({model: req.body.model, color: req.body.color, year: req.body.power, power: req.body.power})
+    
+    res.status(201).send("Vehicle added") 
+    
+    //res.send(vehicles[1])
+    //vehicles.push(car)
+    //res.send(req.body.model) 
+    
+
+    //console.log(vehicles)
     //res.status(201).send("Vehicle added")
 })
 
