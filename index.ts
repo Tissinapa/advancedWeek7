@@ -51,7 +51,7 @@ app.post("/vehicle/add", (req: Request , res: Response)=>{
     vehicles.push(car)
     vehicles.push(boat)
     vehicles.push(plane)
-    //vehicles.push({model: "volvo", color: "Red", year: 60, power: 60})
+    //vehicles.push({model: "volvo", color: "Red", year: 60, power: 60,bodytype: "sedan",wheelCount: 5})
     //res.send(vehicles)
     res.status(201).send("Vehicle added") 
     
@@ -61,18 +61,22 @@ app.post("/vehicle/add", (req: Request , res: Response)=>{
 })
 app.get("/vehicle/search/:model",(req: Request, res: Response)=>{
     //name: req.body.name
+    
     const findModel: string = req.params.model
-    let carModel = vehicles.filter((obj)=>{
+    let targetModel = vehicles.find((obj)=>{
+
         return obj.model===findModel
     })
     //console.log(carModel)
-    if(!carModel){
+    if(!targetModel){
         //res.send(carModel)
-        res.send(404)
+        res.status(404).send(404)
+        //res.send(targetModel)
     }
     else{
         //res.send(404)
-        res.send(carModel)
+
+        res.send(targetModel)
     }
     //res.send(carModel)
 })
