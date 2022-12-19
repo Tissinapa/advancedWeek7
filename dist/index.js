@@ -17,20 +17,19 @@ app.get("/hello", (req, res) => {
     res.send("Hello world");
 });
 app.post("/vehicle/add", (req, res) => {
-    let car = {
-        model: "volvo",
-        color: "puinainen",
-        year: 1234,
-        power: 123
-    };
+    let { model, color, year, power, bodytype, wheelCount, draft, wingspan } = req.body;
+    let car = { model, color, year, power, bodytype, wheelCount };
+    let boat = { model, color, year, power, draft };
+    let plane = { model, color, year, power, wingspan };
     //console.log(model)
-    vehicles.push({ model: req.body.model, color: req.body.color, year: req.body.power, power: req.body.power });
+    //vehicles.push({model: req.body.model, color: req.body.color, year: req.body.power, power: req.body.power})
+    vehicles.push(car);
+    vehicles.push(boat);
+    vehicles.push(plane);
+    //vehicles.push({model: "volvo", color: "Red", year: 60, power: 60})
+    //res.send(vehicles)
     res.status(201).send("Vehicle added");
-    //res.send(vehicles[1])
     //vehicles.push(car)
-    //res.send(req.body.model) 
-    //console.log(vehicles)
-    //res.status(201).send("Vehicle added")
 });
 app.get("/vehicle/search/:model", (req, res) => {
     //name: req.body.name
@@ -40,9 +39,11 @@ app.get("/vehicle/search/:model", (req, res) => {
     });
     //console.log(carModel)
     if (!carModel) {
+        //res.send(carModel)
         res.send(404);
     }
     else {
+        //res.send(404)
         res.send(carModel);
     }
     //res.send(carModel)
